@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MaxCage_ContactUs::contactus" title="Contact Us Customers" translate="title"
+             module="MaxCage_ContactUs" parent="Magento_Backend::marketing_communications" sortOrder="130"
+             action="contactus/contacts/" resource="MaxCage_ContactUs::contact_us"/>
+    </menu>
+</config>

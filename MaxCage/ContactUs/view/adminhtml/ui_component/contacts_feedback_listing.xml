@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">contacts_feedback_listing.contactus_contactus_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>contacts_feedback_columns</spinner>
+        <deps>
+            <dep>contacts_feedback_listing.contactus_contactus_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="contactus_contactus_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>MaxCage_ContactUs::contact_us</aclResource>
+        <dataProvider class="MaxCage\ContactUs\Ui\DataProvider\ContactUsDataProvider" name="contactus_contactus_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="contacts_feedback_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">contacts_feedback_listing.contacts_feedback_listing.contacts_feedback_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">edit</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="telephone">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Telephone</label>
+            </settings>
+        </column>
+        <column name="email">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Email</label>
+            </settings>
+        </column>
+
+        <column name="creation_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Creation time</label>
+            </settings>
+        </column>
+
+        <column name="status" class="MaxCage\ContactUs\Ui\Component\Listing\Column\MessageStatus">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions" class="MaxCage\ContactUs\Ui\Component\Listing\Column\MessageActions">
+            <settings>
+                <indexField>entity_id</indexField>
+                <label translate="true">Edit</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>
